@@ -6,7 +6,7 @@
   border: 1px solid #0070C0;
   cursor: pointer;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  font-family: 'Berlin Sans FB', Arial, sans-serif;
+  font-family: 'BerlinSansFB', Arial, sans-serif;
 }
 
 .t15_anios{
@@ -185,7 +185,7 @@ overflow: hidden; /* Asegura que el contenido no sobrepase el contenedor */
 
 @font-face {
   font-family: 'Ahronbd';
-  src: url('/assets/fonts/Ahronbd.ttf') format('ttf');
+  src: url('/assets/font/Ahronbd.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -226,7 +226,7 @@ border-right: none; /* Elimina el borde derecho del último elemento */
 .value-ct {
 font-size: 1.9em;
 color: #446B85;
-font-family: 'Berlin Sans FB', Arial, sans-serif;
+font-family: 'BerlinSansFB', Arial, sans-serif;
 font-weight: 100;
 }
 
@@ -235,7 +235,7 @@ padding-top: 20px;
 width: 100%;
 font-size: 1.5em;
 color: #446B85;
-font-family: 'Berlin Sans FB', Arial, sans-serif;
+font-family: 'BerlinSansFB', Arial, sans-serif;
 font-weight: 100;
 }
 

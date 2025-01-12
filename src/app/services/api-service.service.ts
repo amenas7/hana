@@ -15,7 +15,7 @@ export class ApiServiceService {
 
     const options = { observe: 'response' as 'body' };
 
-    return this.http.post(`https://alvarodev.store/api/send_data.php`, params, options);
+    return this.http.post(`https://mis-quince-hannah.com/api/send_data.php`, params, options);
 
   }
 

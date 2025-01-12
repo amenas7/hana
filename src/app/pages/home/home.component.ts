@@ -341,7 +341,7 @@ export class HomeComponent implements OnInit, OnDestroy{
         }
   
         try {
-          const url = `https://alvarodev.store/api/send_music.php`;
+          const url = `https://mis-quince-hannah.com/api/send_music.php`;
           const _nombre_autor = { nombre_autor };
   
           const response = await fetch(url, {

@@ -14,8 +14,8 @@ body { margin: 0; }
 
 
 @font-face {
-    font-family: 'Berlin Sans FB';
-    src: url('/assets/fonts/Berlin-Sans-FB-Regular.ttf') format('truetype');
+    font-family: 'BerlinSansFB';
+    src: url('/assets/font/BerlinSansFBRegular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,14 +23,14 @@ body { margin: 0; }
 
 @font-face {
     font-family: 'Ahronbd';
-    src: url('/assets/fonts/Ahronbd.ttf') format('ttf');
+    src: url('/assets/font/Ahronbd.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Ahronbdd';
-    src: url('/assets/fonts/ahronbd_d.ttf') format('ttf');
+    src: url('/assets/font/ahronbd_d.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
 }
