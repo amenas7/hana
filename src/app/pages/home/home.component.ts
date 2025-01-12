@@ -96,6 +96,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.getData();
+
     //aos
     AOS.init();
     window.addEventListener('load', AOS.refresh);
@@ -320,7 +322,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       inputAttributes: {
         autocapitalize: "off",
         autocomplete: "off",
-        maxlength: "50"
+        maxlength: "50",
       },
       showCancelButton: true,
       confirmButtonText: "Registrar",
@@ -330,25 +332,24 @@ export class HomeComponent implements OnInit, OnDestroy{
       preConfirm: async (nombre_autor) => {
         if (!nombre_autor || nombre_autor.trim() === "") {
           Swal.fire({
-            icon: 'error',
-            title: 'Recuerde ingresar su canción y el cantante',
+            icon: "error",
+            title: "Recuerde ingresar su canción y el cantante",
             showConfirmButton: true,
-            showCloseButton: false,
-            confirmButtonColor: '#2A4184'
+            confirmButtonColor: "#2A4184",
           });
-          return false; 
+          return false;
         }
   
         try {
-          const url = `https://alvaro-y-aylin.com/api/send_music.php`;
+          const url = `https://alvarodev.store/api/send_music.php`;
           const _nombre_autor = { nombre_autor };
   
           const response = await fetch(url, {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(_nombre_autor)
+            body: JSON.stringify(_nombre_autor),
           });
   
           if (!response.ok) {
@@ -358,20 +359,30 @@ export class HomeComponent implements OnInit, OnDestroy{
             );
           }
   
-          return response.json();
+          const result = await response.json();
+          return result; // Retorna el resultado completo para evaluar en el "then".
         } catch (error) {
+          console.log("error...", error);
           Swal.showValidationMessage(`No se pudo guardar tus datos`);
         }
       },
-      allowOutsideClick: () => !Swal.isLoading()
+      allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
-      if (result.isConfirmed && result.value) {
+      if (result.isConfirmed && result.value?.ok) {
+        // Muestra el mensaje de éxito si "ok" es true.
         Swal.fire({
-          icon: 'success',
-          title: 'Tu música fue registrada, te esperamos el 07 de Setiembre ❤️',
+          icon: "success",
+          title: "Tu música fue registrada, te espero el 25 de Enero ❤️",
           showConfirmButton: true,
-          showCloseButton: false,
-          confirmButtonColor: '#2A4184'
+          confirmButtonColor: "#446B85",
+        });
+      } else if (result.isConfirmed && !result.value?.ok) {
+        // Muestra un error si "ok" es false.
+        Swal.fire({
+          icon: "error",
+          title: "Hubo un problema al registrar la música",
+          showConfirmButton: true,
+          confirmButtonColor: "#446B85",
         });
       }
     });
@@ -383,13 +394,15 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   confirmar(){
     Swal.fire({
-      icon: 'warning',
-      title: "¿Deseas Confirmar tu invitación?",
+      html: `
+        <img src="https://res.cloudinary.com/dazxupr0x/image/upload/v1736639562/qcn2vmcjvvq9lupifsv2.png" style="width: 60%">
+        <p style="font-weight: 100; font-family: 'Berlin Sans FB', Arial, sans-serif; font-size: 2rem; padding-top: 15px; margin-bottom: 0px;">¿Deseas Confirmar tu asistencia?</p>
+      `,
       showDenyButton: false,
       showCancelButton: true,
       confirmButtonText: "confirmar",
       cancelButtonText: 'Aún no',
-      confirmButtonColor: '#2A4184'
+      confirmButtonColor: '#446B85'
     }).then((result) => {
 
       if (result.isConfirmed) {
@@ -400,7 +413,7 @@ export class HomeComponent implements OnInit, OnDestroy{
             title: 'Recuerde ingresar su nombre',
             showConfirmButton: true,
             showCloseButton: false,
-            confirmButtonColor: '#2A4184'
+            confirmButtonColor: '#446B85'
           });
           return;
         }
@@ -411,7 +424,7 @@ export class HomeComponent implements OnInit, OnDestroy{
             title: 'Recuerde ingresar su celular',
             showConfirmButton: true,
             showCloseButton: false,
-            confirmButtonColor: '#2A4184'
+            confirmButtonColor: '#446B85'
           });
           return;
         }
@@ -422,7 +435,7 @@ export class HomeComponent implements OnInit, OnDestroy{
             title: 'Recuerde seleccionar si podrá asistir a nuestra boda',
             showConfirmButton: true,
             showCloseButton: false,
-            confirmButtonColor: '#2A4184'
+            confirmButtonColor: '#446B85'
           });
           return;
         }
@@ -442,10 +455,15 @@ export class HomeComponent implements OnInit, OnDestroy{
 
              Swal.fire({
               icon: 'success',
-              title: 'Asistencia confirmada',
+              html: `
+                <p style="font-weight: 100; font-family: 'Berlin Sans FB', Arial, sans-serif; font-size: 2rem; padding-top: 15px; margin-bottom: 0px;"> Asistencia confirmada </p>
+                <p style="font-weight: 100; font-family: 'Berlin Sans FB', Arial, sans-serif; font-size: 2rem; padding-top: 15px; margin-bottom: 0px;"> Tu presencia hará mi día aún más especial. </p>
+                <p style="font-weight: 100; font-family: 'Berlin Sans FB', Arial, sans-serif; font-size: 2rem; padding-top: 15px; margin-bottom: 0px;">Siempre recordaré este momento lleno de amor y alegría gracias a ti. 💖</p>
+              `,
               showConfirmButton: true,
               showCloseButton: false,
-              confirmButtonColor: '#2A4184'
+              confirmButtonColor: '#446B85',
+              confirmButtonText: "Cerrar",
             });
 
             this._inputNombre = "";
@@ -462,8 +480,20 @@ export class HomeComponent implements OnInit, OnDestroy{
         );
 
 
-      } else if (result.isDenied) {
-        
+      } else if (result.isDismissed) {
+
+        Swal.fire({
+          html: `
+            <p style="font-weight: 100; font-family: 'Berlin Sans FB', Arial, sans-serif; font-size: 2rem; padding-top: 15px; margin-bottom: 0px;"> Tu presencia hará mi día aún más especial. </p>
+            <p style="font-weight: 100; font-family: 'Berlin Sans FB', Arial, sans-serif; font-size: 2rem; padding-top: 15px; margin-bottom: 0px;">Siempre recordaré este momento lleno de amor y alegría gracias a ti. 💖</p>
+          `,
+          showConfirmButton: true,
+          showCloseButton: false,
+          confirmButtonColor: '#446B85',
+          confirmButtonText: "Cerrar",
+        });
+
+
       }
 
     });
@@ -482,6 +512,12 @@ export class HomeComponent implements OnInit, OnDestroy{
     if (this.audio) {
       this.audio.muted = this.isMuted;
     }
+  }
+
+  getData() {
+    // this.apiService.findData().subscribe((result: any) => {
+    //   console.log("resultado...",result)  
+    // })
   }
 
 }

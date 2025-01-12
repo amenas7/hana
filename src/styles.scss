@@ -1,5 +1,36 @@
 html, body { 
     height: 100%;
-    background-color: #FAF8F4;
+    background-color: #fcfcfc;
 }
 body { margin: 0; }
+
+
+@font-face {
+    font-family: 'Ruthligos';
+    src: url('/assets/font/Ruthligos.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Berlin Sans FB';
+    src: url('/assets/fonts/Berlin-Sans-FB-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Ahronbd';
+    src: url('/assets/fonts/Ahronbd.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Ahronbdd';
+    src: url('/assets/fonts/ahronbd_d.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
